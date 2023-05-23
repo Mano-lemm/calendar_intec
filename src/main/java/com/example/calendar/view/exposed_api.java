@@ -7,5 +7,6 @@ public interface exposed_api {
     public TaskResponse updateTask(UpdateTaskRequest req);
     public TaskResponse deleteTask(DeleteTaskRequest req);
     public ReadAllTasksResponse readAllTasksOnDay(ReadAllTasksOnDayRequest req);
+    public ReadAllTasksResponse ReadAllTasks();
     public ReadAllTasksResponse ReadAllTasksInRange(ReadAllTasksInRangeRequest req);
 }

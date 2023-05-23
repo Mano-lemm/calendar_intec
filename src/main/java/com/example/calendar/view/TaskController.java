@@ -6,7 +6,7 @@ import com.example.calendar.model.dtos.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
 public class TaskController implements exposed_api{
     private final TaskService taskService;
@@ -43,5 +43,11 @@ public class TaskController implements exposed_api{
     @Override
     public ReadAllTasksResponse ReadAllTasksInRange(@RequestBody ReadAllTasksInRangeRequest req) {
         return taskService.readAllTasksInRange(req);
+    }
+
+    @GetMapping("/read/all")
+    @Override
+    public ReadAllTasksResponse ReadAllTasks() {
+        return taskService.readAllTasks();
     }
 }

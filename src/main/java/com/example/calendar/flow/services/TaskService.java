@@ -58,4 +58,11 @@ public class TaskService {
                         .map(TaskMapper::toReadResponse)
                         .collect(Collectors.toList()));
     }
+
+    public ReadAllTasksResponse readAllTasks() {
+        return TaskMapper.toReadAllResponse(
+                repo.findAll().stream()
+                .map(TaskMapper::toReadResponse)
+                .collect(Collectors.toList()));
+    }
 }
