@@ -10,5 +10,5 @@ public class UpdateTaskRequest {
     private Long id;
     private ZonedDateTime dateTime;
     private String Description;
-    private String title;
+    private String Title;
 }
