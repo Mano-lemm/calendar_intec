@@ -14,7 +14,7 @@ public class Task {
     private Long id;
     private Timestamp timeStamp;
     private ZoneOffset timezone;
-    private String description;
+    private String Description;
     private String Title;
     @ManyToOne
     private User Owner;

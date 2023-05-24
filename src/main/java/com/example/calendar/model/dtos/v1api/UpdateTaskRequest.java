@@ -9,6 +9,6 @@ public class UpdateTaskRequest {
     // what task to update
     private Long id;
     private ZonedDateTime dateTime;
-    private String description;
+    private String Description;
     private String title;
 }

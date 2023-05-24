@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>calendar_project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>kahoot_clone</name>
-    <description>kahoot_clone</description>
+    <name>Calender application</name>
+    <description>A rather simple calendar backend</description>
     <properties>
         <java.version>17</java.version>
     </properties>

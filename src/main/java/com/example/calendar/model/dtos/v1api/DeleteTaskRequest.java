@@ -1,8 +1,8 @@
 package com.example.calendar.model.dtos.v1api;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class DeleteTaskRequest {
     private Long id;
 }

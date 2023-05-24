@@ -38,7 +38,7 @@ public class TaskService {
     public TaskResponse deleteTask(DeleteTaskRequest req) throws TaskDoesNotExistException{
         Task task = TaskMapper.toEntity(req);
         if(repo.findById(task.getId()).isEmpty()){
-            throw new TaskDoesNotExistException();
+            throw new TaskDoesNotExistException("this task does not exist");
         }
         repo.deleteById(task.getId());
         return TaskMapper.toResponse(task);
