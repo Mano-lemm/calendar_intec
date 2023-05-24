@@ -1,11 +1,10 @@
 package com.example.calendar.model.dtos.v1api;
 
-import lombok.Value;
+import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
-@Value
+@Data
 public class ReadAllTasksOnDayRequest {
     private ZonedDateTime date;
 }

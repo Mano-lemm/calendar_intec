@@ -6,8 +6,8 @@ import java.time.ZonedDateTime;
 
 @Value
 public class ReadTaskResponse {
-    private Long id;
-    private String Title;
-    private String Description;
-    private ZonedDateTime dateTime;
+    Long id;
+    String Title;
+    String Description;
+    ZonedDateTime dateTime;
 }

@@ -1,11 +1,11 @@
 package com.example.calendar.model.dtos.v1api;
 
-import lombok.Value;
+import lombok.Data;
 
 import java.time.ZonedDateTime;
 
-@Value
+@Data
 public class ReadAllTasksInRangeRequest {
-    ZonedDateTime start;
-    ZonedDateTime end;
+    private ZonedDateTime start;
+    private ZonedDateTime end;
 }
