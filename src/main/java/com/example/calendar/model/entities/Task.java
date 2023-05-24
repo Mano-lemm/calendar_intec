@@ -3,8 +3,8 @@ package com.example.calendar.model.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Time;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.ZoneOffset;
 
 @Data
 @Entity
@@ -12,8 +12,8 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
-    private Time time;
+    private Timestamp timeStamp;
+    private ZoneOffset timezone;
     private String description;
     private String Title;
     @ManyToOne

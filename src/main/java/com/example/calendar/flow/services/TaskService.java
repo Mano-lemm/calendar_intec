@@ -8,6 +8,8 @@ import com.example.calendar.model.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,18 +45,19 @@ public class TaskService {
     }
 
     public ReadAllTasksResponse readAllTasksOnDay(ReadAllTasksOnDayRequest req) {
-        Date date = Date.valueOf(req.getDate());
         return TaskMapper.toReadAllResponse(
-                repo.findAllByDate(date).stream()
+                repo.findAll().stream()
+                        .filter(task -> task.getTimeStamp().toLocalDateTime().toLocalDate().equals(req.getDate().toLocalDate()))
                         .map(TaskMapper::toReadResponse)
                         .collect(Collectors.toList()));
     }
 
     public ReadAllTasksResponse readAllTasksInRange(ReadAllTasksInRangeRequest req) {
-        Date start = Date.valueOf(req.getStart());
-        Date end = Date.valueOf(req.getEnd());
         return TaskMapper.toReadAllResponse(
-                repo.findAllByDateBetween(start, end).stream()
+                repo.findAll().stream()
+                        .filter(task ->
+                                task.getTimeStamp().toLocalDateTime().isAfter(req.getStart().toLocalDateTime()) &&
+                                task.getTimeStamp().toLocalDateTime().isBefore(req.getEnd().toLocalDateTime()))
                         .map(TaskMapper::toReadResponse)
                         .collect(Collectors.toList()));
     }

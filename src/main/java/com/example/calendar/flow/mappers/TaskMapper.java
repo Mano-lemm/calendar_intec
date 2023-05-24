@@ -6,7 +6,10 @@ import lombok.experimental.UtilityClass;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,8 +17,8 @@ import java.util.List;
 public class TaskMapper {
     public static Task toEntity(CreateTaskRequest req){
         Task task = new Task();
-        task.setTime(Time.valueOf(req.getDateTime().toLocalTime()));
-        task.setDate(Date.valueOf(req.getDateTime().toLocalDate()));
+        task.setTimeStamp(Timestamp.from(req.getDateTime().toInstant()));
+        task.setTimezone(req.getDateTime().getOffset());
         task.setDescription(req.getDescription());
         task.setTitle(req.getTitle());
         return task;
@@ -23,8 +26,8 @@ public class TaskMapper {
 
     public static Task toEntity(UpdateTaskRequest req){
         Task task = new Task();
-        task.setTime(Time.valueOf(req.getDateTime().toLocalTime()));
-        task.setDate(Date.valueOf(req.getDateTime().toLocalDate()));
+        task.setTimeStamp(Timestamp.from(req.getDateTime().toInstant()));
+        task.setTimezone(req.getDateTime().getOffset());
         task.setDescription(req.getDescription());
         task.setTitle(req.getTitle());
         task.setId(req.getId());
@@ -46,9 +49,7 @@ public class TaskMapper {
             task.getId(),
             task.getTitle(),
             task.getDescription(),
-            LocalDateTime.of(
-                    task.getDate().toLocalDate(),
-                    task.getTime().toLocalTime()));
+            ZonedDateTime.ofInstant(task.getTimeStamp().toInstant(), task.getTimezone()));
     }
 
     public static ReadAllTasksResponse toReadAllResponse(List<ReadTaskResponse> tasks){
