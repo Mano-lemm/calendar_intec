@@ -1,4 +1,4 @@
-package com.example.calendar.view;
+package com.example.calendar.view.v2api;
 
 import com.example.calendar.model.dtos.v2api.*;
 

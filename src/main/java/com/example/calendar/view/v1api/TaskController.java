@@ -1,8 +1,8 @@
-package com.example.calendar.view;
+package com.example.calendar.view.v1api;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
 import com.example.calendar.flow.services.TaskService;
-import com.example.calendar.model.dtos.*;
+import com.example.calendar.model.dtos.v1api.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 @RequestMapping("/api/v1")
-public class TaskController implements exposed_api{
+public class TaskController implements V1API{
     private final TaskService taskService;
 
     public TaskController(TaskService service){
