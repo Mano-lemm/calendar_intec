@@ -4,4 +4,6 @@ import lombok.Value;
 
 @Value
 public class CreateUserRequest {
+    String name;
+    String password;
 }
