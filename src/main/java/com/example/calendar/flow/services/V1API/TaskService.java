@@ -1,15 +1,12 @@
-package com.example.calendar.flow.services;
+package com.example.calendar.flow.services.V1API;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
-import com.example.calendar.flow.mappers.TaskMapper;
+import com.example.calendar.flow.mappers.V1API.TaskMapper;
 import com.example.calendar.model.dtos.v1api.*;
 import com.example.calendar.model.entities.Task;
 import com.example.calendar.model.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.ZonedDateTime;
 import java.util.stream.Collectors;
 
 @Service

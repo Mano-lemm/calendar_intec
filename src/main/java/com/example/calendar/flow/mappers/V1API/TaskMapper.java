@@ -1,4 +1,4 @@
-package com.example.calendar.flow.mappers;
+package com.example.calendar.flow.mappers.V1API;
 
 import com.example.calendar.model.dtos.v1api.*;
 import com.example.calendar.model.entities.Task;

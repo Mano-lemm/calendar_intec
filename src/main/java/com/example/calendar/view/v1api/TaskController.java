@@ -1,7 +1,7 @@
 package com.example.calendar.view.v1api;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
-import com.example.calendar.flow.services.TaskService;
+import com.example.calendar.flow.services.V1API.TaskService;
 import com.example.calendar.model.dtos.v1api.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
