@@ -10,6 +10,5 @@ public class User {
     @Id
     private Long id;
     private String name;
-    private String pwdHash;
-    private String pepper;
+    private String pwdHashAndSalt;
 }
