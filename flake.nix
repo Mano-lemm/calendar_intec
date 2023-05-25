@@ -8,18 +8,22 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in {
-
-        packages.default = pkgs.dockerTools.streamLayeredImage {
+      let 
+        pkgs = nixpkgs.legacyPackages.${system}; 
+        dockerImage = pkgs.dockerTools.buildImage {
           name = "calendar back end server";
           tag = "0.1";
           created = "now";
 
           contents = with pkgs; [
+            bash
+            coreutils
             jdk
             maven
           ];
         };
+      in {
+        packages.default = dockerImage;
       }
     );
 }
