@@ -2,13 +2,13 @@ package com.example.calendar.view;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
 import com.example.calendar.flow.services.TaskService;
-import com.example.calendar.model.dtos.*;
+import com.example.calendar.model.dtos.v1api.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
-public class TaskController implements exposed_api{
+public class TaskController implements V1API {
     private final TaskService taskService;
 
     public TaskController(TaskService service){

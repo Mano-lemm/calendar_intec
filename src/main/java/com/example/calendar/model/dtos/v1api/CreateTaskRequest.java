@@ -1,4 +1,4 @@
-package com.example.calendar.model.dtos;
+package com.example.calendar.model.dtos.v1api;
 
 import lombok.Value;
 

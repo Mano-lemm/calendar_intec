@@ -1,6 +1,6 @@
 package com.example.calendar.flow.mappers;
 
-import com.example.calendar.model.dtos.*;
+import com.example.calendar.model.dtos.v1api.*;
 import com.example.calendar.model.entities.Task;
 import lombok.experimental.UtilityClass;
 

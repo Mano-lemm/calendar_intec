@@ -16,4 +16,6 @@ public class Task {
     private Time time;
     private String description;
     private String Title;
+    @ManyToOne
+    private User Owner;
 }

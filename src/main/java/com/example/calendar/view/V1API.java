@@ -1,8 +1,8 @@
 package com.example.calendar.view;
 
-import com.example.calendar.model.dtos.*;
+import com.example.calendar.model.dtos.v1api.*;
 
-public interface exposed_api {
+public interface V1API {
     public TaskResponse createTask(CreateTaskRequest req);
     public TaskResponse updateTask(UpdateTaskRequest req);
     public TaskResponse deleteTask(DeleteTaskRequest req);

@@ -2,7 +2,7 @@ package com.example.calendar.flow.services;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
 import com.example.calendar.flow.mappers.TaskMapper;
-import com.example.calendar.model.dtos.*;
+import com.example.calendar.model.dtos.v1api.*;
 import com.example.calendar.model.entities.Task;
 import com.example.calendar.model.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
