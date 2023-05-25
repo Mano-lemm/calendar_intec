@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 
 @UtilityClass
-public class TaskMapper {
+public class TaskMapperV2 {
     public static Task toEntity(CreateTaskRequest req) {
         Task t = new Task();
         t.setDescription(req.getDescription());
@@ -42,7 +42,7 @@ public class TaskMapper {
                 .dateTime(ZonedDateTime.of(task.getTimeStamp().toLocalDateTime(), task.getTimezone()))
                 .title(task.getTitle())
                 .description(task.getDescription())
-                .Owner(UserMapper.toGetResponse(task.getOwner()));
+                .Owner(UserMapperV2.toGetResponse(task.getOwner()));
         return tgr;
     }
 }

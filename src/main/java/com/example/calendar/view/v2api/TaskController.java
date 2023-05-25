@@ -1,21 +1,14 @@
 package com.example.calendar.view.v2api;
 
-import com.example.calendar.flow.exceptions.UserDoesNotExistException;
 import com.example.calendar.flow.services.V2API.*;
 import com.example.calendar.model.dtos.v2api.*;
-import com.example.calendar.model.entities.Task;
-import com.example.calendar.model.entities.User;
-import com.example.calendar.model.repositories.TaskRepository;
-import com.example.calendar.model.repositories.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 public class TaskController implements V2TaskAPI{
-    private final TaskService ts;
+    private final TaskServiceV2 ts;
 
-    public TaskController(TaskService taskService){
+    public TaskController(TaskServiceV2 taskService){
         this.ts = taskService;
     }
 

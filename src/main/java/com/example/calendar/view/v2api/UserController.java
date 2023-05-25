@@ -1,12 +1,12 @@
 package com.example.calendar.view.v2api;
 
-import com.example.calendar.flow.services.V2API.UserService;
+import com.example.calendar.flow.services.V2API.UserServiceV2;
 import com.example.calendar.model.dtos.v2api.*;
 
 public class UserController implements V2UserAPI{
-    private final UserService us;
+    private final UserServiceV2 us;
 
-    public UserController(UserService us){
+    public UserController(UserServiceV2 us){
         this.us = us;
     }
 

@@ -2,7 +2,7 @@ package com.example.calendar.flow.services.V2API;
 
 import com.example.calendar.flow.exceptions.UserDoesNotExistException;
 import com.example.calendar.flow.exceptions.UserPasswordDoesNotMatchException;
-import com.example.calendar.flow.mappers.V2API.UserMapper;
+import com.example.calendar.flow.mappers.V2API.UserMapperV2;
 import com.example.calendar.model.dtos.v2api.*;
 import com.example.calendar.model.entities.User;
 import com.example.calendar.model.repositories.TaskRepository;
@@ -12,51 +12,47 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
-    @Value("${PASSWORD_PEPPER}")
+public class UserServiceV2 {
     private String pepper;
-    @Value("${PASSWORD_STR}")
-    private Integer passwordStrength;
     private final UserRepository ur;
     private final TaskRepository tr;
     private final BCryptPasswordEncoder encoder;
-    private final TaskService ts;
 
-    public UserService(TaskService taskService, TaskRepository taskRepository, UserRepository userRepository, BCryptPasswordEncoder encoder){
+    public UserServiceV2(TaskRepository taskRepository, UserRepository userRepository, @Value("${PASSWORD_PEPPER}") String pepper){
         this.ur = userRepository;
-        this.ts = taskService;
         this.tr = taskRepository;
-        this.encoder = encoder;
+        this.pepper = pepper;
+        this.encoder = new BCryptPasswordEncoder();
     }
 
     public UserPostResponse createUser(CreateUserRequest req) {
-        User user = UserMapper.toEntity(req);
+        User user = UserMapperV2.toEntity(req);
         user.setPwdHashAndSalt(encoder.encode(req.getPassword() + pepper));
         user = ur.save(user);
-        return UserMapper.toResponse(user);
+        return UserMapperV2.toResponse(user);
     }
 
     public UserPostResponse updateUser(UpdateUserRequest req) {
-        User updated = UserMapper.toEntity(req);
+        User updated = UserMapperV2.toEntity(req);
         User current = ur.findById(updated.getId()).orElseThrow(UserDoesNotExistException::new);
         if(!encoder.matches(req.getPassword(), current.getPwdHashAndSalt())){
             throw new UserPasswordDoesNotMatchException();
         }
         updated.setPwdHashAndSalt(current.getPwdHashAndSalt());
         ur.save(updated);
-        return UserMapper.toResponse(updated);
+        return UserMapperV2.toResponse(updated);
     }
 
     public UserPostResponse deleteUser(DeleteUserRequest req) {
-        User user = UserMapper.toEntity(req);
+        User user = UserMapperV2.toEntity(req);
         User toDelete = ur.findById(user.getId()).orElseThrow(UserDoesNotExistException::new);
         ur.delete(toDelete);
-        return UserMapper.toResponse(toDelete);
+        return UserMapperV2.toResponse(toDelete);
     }
 
     public UserGetResponse getUser(ReadUserRequest req) {
-        User user = UserMapper.toEntity(req);
+        User user = UserMapperV2.toEntity(req);
         user = ur.findById(user.getId()).orElseThrow(UserDoesNotExistException::new);
-        return UserMapper.toGetResponse(user);
+        return UserMapperV2.toGetResponse(user);
     }
 }
