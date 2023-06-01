@@ -1,6 +1,7 @@
 package com.example.calendar.flow.services.V2API;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
+import com.example.calendar.flow.exceptions.UnqualifiedTaskUpdateException;
 import com.example.calendar.flow.exceptions.UserDoesNotExistException;
 import com.example.calendar.flow.mappers.V2API.TaskMapperV2;
 import com.example.calendar.model.dtos.v2api.*;
@@ -34,9 +35,16 @@ public class TaskServiceV2 {
     }
 
     public TaskPostResponse updateTask(UpdateTaskRequest req) {
+        Task newTask = TaskMapperV2.toEntity(req);
         User user = ur.findById(req.getOwnerId()).orElseThrow(UserDoesNotExistException::new);
-        Task task = TaskMapperV2.toEntity(req);
-        task.setOwner(user);
+        Task task = tr.findById(req.getTaskId()).orElseThrow(TaskDoesNotExistException::new);
+        if(!task.getOwner().equals(user)){
+            throw new UnqualifiedTaskUpdateException();
+        };
+        task.setTimezone(newTask.getTimezone());
+        task.setTitle(newTask.getTitle());
+        task.setDescription(newTask.getDescription());
+        task.setTimeStamp(newTask.getTimeStamp());
         task = tr.save(task);
         return TaskMapperV2.toResponse(task);
     }
@@ -63,11 +71,16 @@ public class TaskServiceV2 {
 
     public List<TaskGetResponse> getAllTasksInRange(GetTasksInRangeRequest req) {
         return tr.findAll().stream()
-                .filter(e -> {
-                    return e.getTimeStamp().toLocalDateTime().isAfter(req.getStart().toLocalDateTime()) &&
-                            e.getTimeStamp().toLocalDateTime().isBefore(req.getEnd().toLocalDateTime());
-                })
+                .filter(e -> e.getTimeStamp().toLocalDateTime().isAfter(req.getStart().toLocalDateTime()) &&
+                        e.getTimeStamp().toLocalDateTime().isBefore(req.getEnd().toLocalDateTime()))
                 .map(TaskMapperV2::toGetResponse)
                 .collect(Collectors.toList());
+    }
+
+    public List<TaskGetResponse> getAllTasksByUserId(Long userId) {
+        User user = ur.findById(userId).orElseThrow(UserDoesNotExistException::new);
+        return tr.findAllByOwnerId(user.getId()).stream()
+                        .map(TaskMapperV2::toGetResponse)
+                        .collect(Collectors.toList());
     }
 }

@@ -6,8 +6,9 @@ import java.time.ZonedDateTime;
 
 @Value
 public class UpdateTaskRequest {
-    private ZonedDateTime dateTime;
-    private String description;
-    private String title;
-    private Long ownerId;
+    ZonedDateTime dateTime;
+    String description;
+    String title;
+    Long ownerId;
+    Long taskId;
 }

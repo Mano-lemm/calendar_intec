@@ -2,18 +2,21 @@ package com.example.calendar.view.v2api;
 
 import com.example.calendar.model.dtos.v2api.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface V2TaskAPI {
-    public TaskPostResponse createTask(CreateTaskRequest req);
+    TaskPostResponse createTask(CreateTaskRequest req);
 
-    public TaskPostResponse updateTask(UpdateTaskRequest req);
+    TaskPostResponse updateTask(UpdateTaskRequest req);
 
-    public TaskPostResponse deleteTask(DeleteTaskRequest req);
+    TaskPostResponse deleteTask(Long id);
 
-    public TaskGetResponse getTask(GetTaskRequest req);
+    TaskGetResponse getTask(GetTaskRequest req);
 
-    public List<TaskGetResponse> getAllTasks();
+    List<TaskGetResponse> getAllTasks();
 
-    public List<TaskGetResponse> getAllTasksInRange(GetTasksInRangeRequest req);
+    List<TaskGetResponse> getAllTasksByUserId(Long userId);
+
+    List<TaskGetResponse> getAllTasksInRange(ZonedDateTime start, ZonedDateTime end);
 }

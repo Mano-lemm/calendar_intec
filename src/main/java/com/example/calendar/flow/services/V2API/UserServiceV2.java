@@ -2,6 +2,7 @@ package com.example.calendar.flow.services.V2API;
 
 import com.example.calendar.flow.exceptions.UserDoesNotExistException;
 import com.example.calendar.flow.exceptions.UserPasswordDoesNotMatchException;
+import com.example.calendar.flow.exceptions.UserPasswordIllegalException;
 import com.example.calendar.flow.mappers.V2API.UserMapperV2;
 import com.example.calendar.model.dtos.v2api.*;
 import com.example.calendar.model.entities.User;
@@ -53,6 +54,15 @@ public class UserServiceV2 {
     public UserGetResponse getUser(ReadUserRequest req) {
         User user = UserMapperV2.toEntity(req);
         user = ur.findById(user.getId()).orElseThrow(UserDoesNotExistException::new);
+        return UserMapperV2.toGetResponse(user);
+    }
+
+    public UserGetResponse loginUser(LoginRequest req) {
+        User user = UserMapperV2.toEntity(req);
+        user = ur.findByName(user.getName()).orElseThrow(UserDoesNotExistException::new);
+        if(!encoder.matches(req.getPassword() + this.pepper, user.getPwdHashAndSalt())) {
+            throw new UserPasswordIllegalException();
+        }
         return UserMapperV2.toGetResponse(user);
     }
 }

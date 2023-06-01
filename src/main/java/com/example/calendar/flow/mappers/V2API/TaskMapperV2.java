@@ -38,11 +38,12 @@ public class TaskMapperV2 {
     }
 
     public static TaskGetResponse toGetResponse(Task task) {
-        TaskGetResponse tgr = new TaskGetResponse()
-                .dateTime(ZonedDateTime.of(task.getTimeStamp().toLocalDateTime(), task.getTimezone()))
-                .title(task.getTitle())
-                .description(task.getDescription())
-                .Owner(UserMapperV2.toGetResponse(task.getOwner()));
+        TaskGetResponse tgr = new TaskGetResponse();
+        tgr.setDateTime(ZonedDateTime.of(task.getTimeStamp().toLocalDateTime(), task.getTimezone()));
+        tgr.setTitle(task.getTitle());
+        tgr.setDescription(task.getDescription());
+        tgr.setOwner(UserMapperV2.toGetResponse(task.getOwner()));
+        tgr.setId(task.getId());
         return tgr;
     }
 }

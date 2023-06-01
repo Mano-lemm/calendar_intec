@@ -1,9 +1,11 @@
 package com.example.calendar.view.v2api;
 
 import com.example.calendar.flow.services.V2API.*;
+import com.example.calendar.model.dtos.v1api.ReadAllTasksResponse;
 import com.example.calendar.model.dtos.v2api.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -18,25 +20,25 @@ public class TaskControllerV2 implements V2TaskAPI{
 
     @PostMapping("create")
     @Override
-    public TaskPostResponse createTask(CreateTaskRequest req) {
+    public TaskPostResponse createTask(@RequestBody CreateTaskRequest req) {
         return ts.createNewTask(req);
     }
 
     @PostMapping("update")
     @Override
-    public TaskPostResponse updateTask(UpdateTaskRequest req) {
+    public TaskPostResponse updateTask(@RequestBody UpdateTaskRequest req) {
         return ts.updateTask(req);
     }
 
     @DeleteMapping("delete")
     @Override
-    public TaskPostResponse deleteTask(DeleteTaskRequest req) {
-        return ts.deleteTask(req);
+    public TaskPostResponse deleteTask(@RequestParam(name = "id") Long id) {
+        return ts.deleteTask(new DeleteTaskRequest(id));
     }
 
     @GetMapping("get")
     @Override
-    public TaskGetResponse getTask(GetTaskRequest req) {
+    public TaskGetResponse getTask(@RequestBody GetTaskRequest req) {
         return ts.getTask(req);
     }
 
@@ -46,9 +48,15 @@ public class TaskControllerV2 implements V2TaskAPI{
         return ts.getAllTasks();
     }
 
+    @GetMapping("getAll")
+    @Override
+    public List<TaskGetResponse> getAllTasksByUserId(@RequestParam(name = "userId") Long userId) {
+        return ts.getAllTasksByUserId(userId);
+    }
+
     @GetMapping("get/range")
     @Override
-    public List<TaskGetResponse> getAllTasksInRange(GetTasksInRangeRequest req) {
-        return ts.getAllTasksInRange(req);
+    public List<TaskGetResponse> getAllTasksInRange(@RequestParam(name = "end") ZonedDateTime end, @RequestParam(name = "start") ZonedDateTime start) {
+        return ts.getAllTasksInRange(new GetTasksInRangeRequest(start, end));
     }
 }

@@ -43,4 +43,10 @@ public class UserMapperV2 {
         user.setId(req.getId());
         return user;
     }
+
+    public static User toEntity(LoginRequest req) {
+        User user = new User();
+        user.setName(req.getUsername());
+        return user;
+    }
 }

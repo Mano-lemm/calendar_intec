@@ -37,4 +37,10 @@ public class UserControllerV2 implements V2UserAPI{
     public UserGetResponse readUser(@RequestBody ReadUserRequest req) {
         return us.getUser(req);
     }
+
+    @GetMapping("login")
+    @Override
+    public UserGetResponse loginUser(@RequestParam(name = "username") String name, @RequestParam("password") String password){
+        return us.loginUser(new LoginRequest(name,password));
+    }
 }
