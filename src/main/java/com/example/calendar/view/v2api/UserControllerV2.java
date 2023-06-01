@@ -14,27 +14,27 @@ public class UserControllerV2 implements V2UserAPI{
         this.us = us;
     }
 
-    @PostMapping("Create")
+    @PostMapping("create")
     @Override
-    public UserPostResponse createUser(CreateUserRequest req) {
+    public UserPostResponse createUser(@RequestBody CreateUserRequest req) {
         return us.createUser(req);
     }
 
     @PostMapping("update")
     @Override
-    public UserPostResponse updateUser(UpdateUserRequest req) {
+    public UserPostResponse updateUser(@RequestBody UpdateUserRequest req) {
         return us.updateUser(req);
     }
 
     @DeleteMapping("delete")
     @Override
-    public UserPostResponse deleteUser(DeleteUserRequest req) {
+    public UserPostResponse deleteUser(@RequestBody DeleteUserRequest req) {
         return us.deleteUser(req);
     }
 
     @GetMapping("get")
     @Override
-    public UserGetResponse readUser(ReadUserRequest req) {
+    public UserGetResponse readUser(@RequestBody ReadUserRequest req) {
         return us.getUser(req);
     }
 }
