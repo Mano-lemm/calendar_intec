@@ -13,7 +13,7 @@ public class UserMapperV2 {
 
     public static User toEntity(CreateUserRequest req) {
         User user = new User();
-        user.setName(req.getName());
+        user.setName(req.name());
         return user;
     }
 
@@ -23,26 +23,26 @@ public class UserMapperV2 {
 
     public static User toEntity(UpdateUserRequest req) {
         User user = new User();
-        user.setName(req.getName());
-        user.setId(req.getId());
+        user.setName(req.name());
+        user.setId(req.id());
         return user;
     }
 
     public static User toEntity(DeleteUserRequest req) {
         User user = new User();
-        user.setId(req.getId());
+        user.setId(req.id());
         return user;
     }
 
     public static User toEntity(ReadUserRequest req) {
         User user = new User();
-        user.setId(req.getId());
+        user.setId(req.id());
         return user;
     }
 
     public static User toEntity(LoginRequest req) {
         User user = new User();
-        user.setName(req.getUsername());
+        user.setName(req.username());
         return user;
     }
 }

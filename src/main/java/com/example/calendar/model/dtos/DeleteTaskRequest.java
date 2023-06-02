@@ -1,8 +1,5 @@
 package com.example.calendar.model.dtos;
 
-import lombok.Value;
 
-@Value
-public class DeleteTaskRequest {
-    Long id;
+public record DeleteTaskRequest(Long id) {
 }

@@ -11,10 +11,10 @@ import java.time.ZonedDateTime;
 public class TaskMapperV2 {
     public static Task toEntity(CreateTaskRequest req) {
         Task t = new Task();
-        t.setDescription(req.getDescription());
-        t.setTitle(req.getTitle());
-        t.setTimeStamp(Timestamp.from(req.getDateTime().toInstant()));
-        t.setTimezone(req.getDateTime().getOffset());
+        t.setDescription(req.description());
+        t.setTitle(req.title());
+        t.setTimeStamp(Timestamp.from(req.dateTime().toInstant()));
+        t.setTimezone(req.dateTime().getOffset());
         return t;
     }
 
@@ -24,16 +24,16 @@ public class TaskMapperV2 {
 
     public static Task toEntity(UpdateTaskRequest req) {
         Task t = new Task();
-        t.setDescription(req.getDescription());
-        t.setTitle(req.getTitle());
-        t.setTimeStamp(Timestamp.from(req.getDateTime().toInstant()));
-        t.setTimezone(req.getDateTime().getOffset());
+        t.setDescription(req.description());
+        t.setTitle(req.title());
+        t.setTimeStamp(Timestamp.from(req.dateTime().toInstant()));
+        t.setTimezone(req.dateTime().getOffset());
         return t;
     }
 
     public static Task toEntity(DeleteTaskRequest req) {
         Task t = new Task();
-        t.setId(req.getId());
+        t.setId(req.id());
         return t;
     }
 

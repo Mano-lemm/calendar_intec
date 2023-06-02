@@ -25,7 +25,7 @@ public class TaskServiceV2 {
     }
 
     public TaskPostResponse createNewTask(CreateTaskRequest req) {
-        User user = ur.findById(req.getOwnerId()).orElseThrow(UserDoesNotExistException::new);
+        User user = ur.findById(req.ownerId()).orElseThrow(UserDoesNotExistException::new);
         Task task = TaskMapperV2.toEntity(req);
         task.setOwner(user);
         task = tr.save(task);
@@ -34,8 +34,8 @@ public class TaskServiceV2 {
 
     public TaskPostResponse updateTask(UpdateTaskRequest req) {
         Task newTask = TaskMapperV2.toEntity(req);
-        User user = ur.findById(req.getOwnerId()).orElseThrow(UserDoesNotExistException::new);
-        Task task = tr.findById(req.getTaskId()).orElseThrow(TaskDoesNotExistException::new);
+        User user = ur.findById(req.ownerId()).orElseThrow(UserDoesNotExistException::new);
+        Task task = tr.findById(req.taskId()).orElseThrow(TaskDoesNotExistException::new);
         if(!task.getOwner().equals(user)){
             throw new UnqualifiedTaskUpdateException();
         }
@@ -57,7 +57,7 @@ public class TaskServiceV2 {
     }
 
     public TaskGetResponse getTask(GetTaskRequest req) {
-        Task task = tr.findById(req.getId()).orElseThrow(TaskDoesNotExistException::new);
+        Task task = tr.findById(req.id()).orElseThrow(TaskDoesNotExistException::new);
         return TaskMapperV2.toGetResponse(task);
     }
 
@@ -69,8 +69,8 @@ public class TaskServiceV2 {
 
     public List<TaskGetResponse> getAllTasksInRange(GetTasksInRangeRequest req) {
         return tr.findAll().stream()
-                .filter(e -> e.getTimeStamp().toLocalDateTime().isAfter(req.getStart().toLocalDateTime()) &&
-                        e.getTimeStamp().toLocalDateTime().isBefore(req.getEnd().toLocalDateTime()))
+                .filter(e -> e.getTimeStamp().toLocalDateTime().isAfter(req.start().toLocalDateTime()) &&
+                        e.getTimeStamp().toLocalDateTime().isBefore(req.end().toLocalDateTime()))
                 .map(TaskMapperV2::toGetResponse)
                 .collect(Collectors.toList());
     }

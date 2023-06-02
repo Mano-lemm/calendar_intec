@@ -25,7 +25,7 @@ public class UserServiceV2 {
 
     public UserPostResponse createUser(CreateUserRequest req) {
         User user = UserMapperV2.toEntity(req);
-        user.setPwdHashAndSalt(encoder.encode(req.getPassword() + pepper));
+        user.setPwdHashAndSalt(encoder.encode(req.password() + pepper));
         user = ur.save(user);
         return UserMapperV2.toResponse(user);
     }
@@ -33,7 +33,7 @@ public class UserServiceV2 {
     public UserPostResponse updateUser(UpdateUserRequest req) {
         User updated = UserMapperV2.toEntity(req);
         User current = ur.findById(updated.getId()).orElseThrow(UserDoesNotExistException::new);
-        if(!encoder.matches(req.getPassword(), current.getPwdHashAndSalt())){
+        if(!encoder.matches(req.password(), current.getPwdHashAndSalt())){
             throw new UserPasswordDoesNotMatchException();
         }
         updated.setPwdHashAndSalt(current.getPwdHashAndSalt());
@@ -57,7 +57,7 @@ public class UserServiceV2 {
     public UserGetResponse loginUser(LoginRequest req) {
         User user = UserMapperV2.toEntity(req);
         user = ur.findByName(user.getName()).orElseThrow(UserDoesNotExistException::new);
-        if(!encoder.matches(req.getPassword() + this.pepper, user.getPwdHashAndSalt())) {
+        if(!encoder.matches(req.password() + this.pepper, user.getPwdHashAndSalt())) {
             throw new UserPasswordIllegalException();
         }
         return UserMapperV2.toGetResponse(user);
