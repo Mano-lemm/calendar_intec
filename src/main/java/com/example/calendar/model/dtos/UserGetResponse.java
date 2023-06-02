@@ -1,4 +1,4 @@
-package com.example.calendar.model.dtos.v2api;
+package com.example.calendar.model.dtos;
 
 import jakarta.validation.constraints.NotNull;
 

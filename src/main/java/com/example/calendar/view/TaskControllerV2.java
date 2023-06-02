@@ -1,8 +1,7 @@
-package com.example.calendar.view.v2api;
+package com.example.calendar.view;
 
-import com.example.calendar.flow.services.V2API.*;
-import com.example.calendar.model.dtos.v1api.ReadAllTasksResponse;
-import com.example.calendar.model.dtos.v2api.*;
+import com.example.calendar.flow.services.TaskServiceV2;
+import com.example.calendar.model.dtos.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;

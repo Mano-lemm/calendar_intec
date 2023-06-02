@@ -1,7 +1,6 @@
-package com.example.calendar.model.dtos.v2api;
+package com.example.calendar.model.dtos;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.time.ZonedDateTime;
 

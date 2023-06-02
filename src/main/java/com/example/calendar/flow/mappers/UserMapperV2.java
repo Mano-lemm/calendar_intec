@@ -1,6 +1,6 @@
-package com.example.calendar.flow.mappers.V2API;
+package com.example.calendar.flow.mappers;
 
-import com.example.calendar.model.dtos.v2api.*;
+import com.example.calendar.model.dtos.*;
 import com.example.calendar.model.entities.User;
 import lombok.experimental.UtilityClass;
 

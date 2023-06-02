@@ -1,6 +1,6 @@
-package com.example.calendar.view.v2api;
+package com.example.calendar.view;
 
-import com.example.calendar.model.dtos.v2api.*;
+import com.example.calendar.model.dtos.*;
 
 public interface V2UserAPI {
     UserPostResponse createUser(CreateUserRequest req);

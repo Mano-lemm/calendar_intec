@@ -1,10 +1,10 @@
-package com.example.calendar.flow.services.V2API;
+package com.example.calendar.flow.services;
 
 import com.example.calendar.flow.exceptions.TaskDoesNotExistException;
 import com.example.calendar.flow.exceptions.UnqualifiedTaskUpdateException;
 import com.example.calendar.flow.exceptions.UserDoesNotExistException;
-import com.example.calendar.flow.mappers.V2API.TaskMapperV2;
-import com.example.calendar.model.dtos.v2api.*;
+import com.example.calendar.flow.mappers.TaskMapperV2;
+import com.example.calendar.model.dtos.*;
 import com.example.calendar.model.entities.Task;
 import com.example.calendar.model.entities.User;
 import com.example.calendar.model.repositories.TaskRepository;
