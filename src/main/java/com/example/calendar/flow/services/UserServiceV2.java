@@ -14,14 +14,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceV2 {
-    private String pepper;
+    private final String pepper;
     private final UserRepository ur;
-    private final TaskRepository tr;
     private final BCryptPasswordEncoder encoder;
 
-    public UserServiceV2(TaskRepository taskRepository, UserRepository userRepository, @Value("${PASSWORD_PEPPER}") String pepper){
+    public UserServiceV2(UserRepository userRepository, @Value("${PASSWORD_PEPPER}") String pepper){
         this.ur = userRepository;
-        this.tr = taskRepository;
         this.pepper = pepper;
         this.encoder = new BCryptPasswordEncoder();
     }

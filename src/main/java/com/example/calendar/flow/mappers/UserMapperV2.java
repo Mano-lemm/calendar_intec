@@ -8,11 +8,9 @@ import java.security.SecureRandom;
 
 @UtilityClass
 public class UserMapperV2 {
-    private static final SecureRandom rand = new SecureRandom();
 
     public static UserGetResponse toGetResponse(User owner) {
-        UserGetResponse ugr = new UserGetResponse(owner.getName(), owner.getId());
-        return ugr;
+        return new UserGetResponse(owner.getName(), owner.getId());
     }
 
     public static User toEntity(CreateUserRequest req) {

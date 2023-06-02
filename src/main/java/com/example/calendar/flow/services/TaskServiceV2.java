@@ -18,12 +18,10 @@ import java.util.stream.Collectors;
 public class TaskServiceV2 {
     private final UserRepository ur;
     private final TaskRepository tr;
-    private final UserServiceV2 us;
 
-    public TaskServiceV2(UserServiceV2 userService, TaskRepository taskRepository, UserRepository userRepository){
+    public TaskServiceV2(TaskRepository taskRepository, UserRepository userRepository){
         this.tr = taskRepository;
         this.ur = userRepository;
-        this.us = userService;
     }
 
     public TaskPostResponse createNewTask(CreateTaskRequest req) {
@@ -40,7 +38,7 @@ public class TaskServiceV2 {
         Task task = tr.findById(req.getTaskId()).orElseThrow(TaskDoesNotExistException::new);
         if(!task.getOwner().equals(user)){
             throw new UnqualifiedTaskUpdateException();
-        };
+        }
         task.setTimezone(newTask.getTimezone());
         task.setTitle(newTask.getTitle());
         task.setDescription(newTask.getDescription());

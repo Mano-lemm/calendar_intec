@@ -5,6 +5,7 @@ import com.example.calendar.model.dtos.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public interface V2TaskAPI {
     TaskPostResponse createTask(CreateTaskRequest req);
 
