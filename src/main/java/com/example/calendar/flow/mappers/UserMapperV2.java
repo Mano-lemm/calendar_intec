@@ -4,8 +4,6 @@ import com.example.calendar.model.dtos.*;
 import com.example.calendar.model.entities.User;
 import lombok.experimental.UtilityClass;
 
-import java.security.SecureRandom;
-
 @UtilityClass
 public class UserMapperV2 {
 

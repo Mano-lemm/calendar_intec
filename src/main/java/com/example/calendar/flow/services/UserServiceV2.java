@@ -6,7 +6,6 @@ import com.example.calendar.flow.exceptions.UserPasswordIllegalException;
 import com.example.calendar.flow.mappers.UserMapperV2;
 import com.example.calendar.model.dtos.*;
 import com.example.calendar.model.entities.User;
-import com.example.calendar.model.repositories.TaskRepository;
 import com.example.calendar.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
