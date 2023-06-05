@@ -18,7 +18,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
         license = @License(
                 name = "GPL v3 License",
                 url = "https://www.gnu.org/licenses/gpl-3.0.html"),
-        version = "0.2b-rc"))
+        version = "0.2-rc"))
 public class CalendarApplication {
 
     public static void main(String[] args) {
