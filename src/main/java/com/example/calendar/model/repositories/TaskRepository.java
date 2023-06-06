@@ -11,6 +11,4 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    @Query("select id, timeStamp, timezone, Description, Title, Owner from Task where Owner.id = ?1")
-    List<Task> findAllByOwnerId(Long id);
 }

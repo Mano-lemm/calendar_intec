@@ -77,7 +77,9 @@ public class TaskServiceV2 {
 
     public List<TaskGetResponse> getAllTasksByUserId(Long userId) {
         User user = ur.findById(userId).orElseThrow(UserDoesNotExistException::new);
-        return tr.findAllByOwnerId(user.getId()).stream()
+        return tr.findAll().stream()
+                        // should be a query, for some reason errors when it is so wcyd
+                        .filter(task -> task.getOwner().equals(user))
                         .map(TaskMapperV2::toGetResponse)
                         .collect(Collectors.toList());
     }
