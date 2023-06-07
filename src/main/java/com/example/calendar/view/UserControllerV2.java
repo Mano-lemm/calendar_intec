@@ -1,8 +1,12 @@
 package com.example.calendar.view;
 
+import com.example.calendar.flow.exceptions.UserDoesNotExistException;
+import com.example.calendar.flow.exceptions.UserPasswordIllegalException;
 import com.example.calendar.flow.services.UserServiceV2;
 import com.example.calendar.model.dtos.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
@@ -23,24 +27,56 @@ public class UserControllerV2 implements V2UserAPI{
     @PostMapping("update")
     @Override
     public UserPostResponse updateUser(@RequestBody UpdateUserRequest req) {
-        return us.updateUser(req);
+        try {
+            return us.updateUser(req);
+        } catch (UserDoesNotExistException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("User with id(%d) does not exist", req.id()),
+                    e);
+        }
     }
 
     @DeleteMapping("delete")
     @Override
     public UserPostResponse deleteUser(@RequestBody DeleteUserRequest req) {
-        return us.deleteUser(req);
+        try {
+            return us.deleteUser(req);
+        } catch (UserDoesNotExistException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("User with id(%d) does not exist", req.id()),
+                    e);
+        } catch (UserPasswordIllegalException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Password did not match",
+                    e);
+        }
     }
 
     @GetMapping("get")
     @Override
     public UserGetResponse readUser(@RequestBody ReadUserRequest req) {
-        return us.getUser(req);
+        try {
+            return us.getUser(req);
+        } catch (UserDoesNotExistException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("User with id(%d) does not exist", req.id()),
+                    e);
+        }
     }
 
     @GetMapping("login")
     @Override
     public UserGetResponse loginUser(@RequestParam(name = "username") String name, @RequestParam("password") String password){
-        return us.loginUser(new LoginRequest(name,password));
+        try {
+            return us.loginUser(new LoginRequest(name,password));
+        } catch (UserDoesNotExistException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("User with name(%s) does not exist", name),
+                    e);
+        } catch (UserPasswordIllegalException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Password did not match",
+                    e);
+        }
     }
 }

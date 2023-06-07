@@ -1,7 +1,6 @@
 package com.example.calendar.flow.services;
 
 import com.example.calendar.flow.exceptions.UserDoesNotExistException;
-import com.example.calendar.flow.exceptions.UserPasswordDoesNotMatchException;
 import com.example.calendar.flow.exceptions.UserPasswordIllegalException;
 import com.example.calendar.flow.mappers.UserMapperV2;
 import com.example.calendar.model.dtos.*;
@@ -34,7 +33,7 @@ public class UserServiceV2 {
         User updated = UserMapperV2.toEntity(req);
         User current = ur.findById(updated.getId()).orElseThrow(UserDoesNotExistException::new);
         if(!encoder.matches(req.password(), current.getPwdHashAndSalt())){
-            throw new UserPasswordDoesNotMatchException();
+            throw new UserPasswordIllegalException();
         }
         updated.setPwdHashAndSalt(current.getPwdHashAndSalt());
         ur.save(updated);
