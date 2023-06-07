@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
+import java.util.TimeZone;
 
 @UtilityClass
 public class TaskMapperV2 {
@@ -39,7 +40,7 @@ public class TaskMapperV2 {
 
     public static TaskGetResponse toGetResponse(Task task) {
         TaskGetResponse tgr = new TaskGetResponse();
-        tgr.setDateTime(ZonedDateTime.of(task.getTimeStamp().toLocalDateTime(), task.getTimezone()));
+        tgr.setDateTime(ZonedDateTime.of(task.getTimeStamp().toLocalDateTime(), TimeZone.getDefault().toZoneId()));
         tgr.setTitle(task.getTitle());
         tgr.setDescription(task.getDescription());
         tgr.setOwner(UserMapperV2.toGetResponse(task.getOwner()));
